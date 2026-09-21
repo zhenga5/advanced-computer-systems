@@ -1,32 +1,9 @@
+#include "kernels.hpp"
 #include <array>
 #include <cstddef>
 #include <iostream>
 
-// y[i] = a * x[i] + y[i]
-template <typename T>
-void axpy(T a, const T* x, T* y, std::size_t n) {
-    for (std::size_t i = 0; i < n; ++i) {
-        y[i] = a * x[i] + y[i];
-    }
-}
 
-// z[i] = x[i] * y[i]
-template <typename T>
-void multiply(const T* x, const T* y, T* z, std::size_t n) {
-    for (std::size_t i = 0; i < n; ++i) {
-        z[i] = x[i] * y[i];
-    }
-}
-
-// Sum all x[i] * y[i].
-template <typename T>
-T dot(const T* x, const T* y, std::size_t n) {
-    T sum = 0;
-    for (std::size_t i = 0; i < n; ++i) {
-        sum += x[i] * y[i];
-    }
-    return sum;
-}
 
 template <typename T>
 bool check_kernels(const char* datatype) {

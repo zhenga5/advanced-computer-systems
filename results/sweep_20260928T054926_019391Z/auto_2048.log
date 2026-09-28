@@ -1,0 +1,2 @@
+float: median 0.064414 microseconds/call
+double: median 0.125166 microseconds/call

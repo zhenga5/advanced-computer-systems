@@ -21,11 +21,28 @@ bool benchmark(std::size_t n, const char* datatype) {
         y[i] = static_cast<T>(1 + i % 5);
     }
 
-    // More repetitions for small arrays.
-    const std::size_t repetitions = std::max<std::size_t>(
-        4, std::min<std::size_t>(10000, 16777216 / n)
-    );
+// Calibrate the batch length before collecting measurements.
+std::size_t repetitions = 1;
+constexpr std::size_t max_repetitions = 16777216;
 
+multiply(x.data(), y.data(), z.data(), n);
+
+    while (true) {
+        const auto start = Clock::now();
+
+        for (std::size_t r = 0; r < repetitions; ++r) {
+            multiply(x.data(), y.data(), z.data(), n);
+        }
+
+        const double seconds =
+            std::chrono::duration<double>(Clock::now() - start).count();
+
+        if (seconds >= 0.030 || repetitions >= max_repetitions) {
+            break;
+        }
+
+        repetitions *= 2;
+    }
     constexpr int trials = 7;
     std::vector<double> times;
 

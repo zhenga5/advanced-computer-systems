@@ -1,0 +1,2 @@
+axpy float: median 0.0488913 microseconds/call
+axpy double: median 0.103628 microseconds/call

@@ -1,0 +1,2 @@
+multiply float: median 0.0306284 microseconds/call
+multiply double: median 0.0552282 microseconds/call

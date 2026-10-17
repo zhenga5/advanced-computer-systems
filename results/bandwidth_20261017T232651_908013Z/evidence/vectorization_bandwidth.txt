@@ -1,0 +1,28 @@
+kernels_bandwidth.cpp:6:31: optimized: loop vectorized using 64 byte vectors
+kernels_bandwidth.cpp:6:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels_bandwidth.cpp:6:31: optimized: loop vectorized using 32 byte vectors
+kernels_bandwidth.cpp:5:6: note: vectorized 1 loops in function.
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V16SF
+kernels_bandwidth.cpp:5:6: note: ***** The result for vector mode V64QI would be the same
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V32QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V32QI
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V16QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V16QI
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V8QI
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V4QI
+kernels_bandwidth.cpp:6:31: optimized: loop vectorized using 64 byte vectors
+kernels_bandwidth.cpp:6:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels_bandwidth.cpp:6:31: optimized: loop vectorized using 32 byte vectors
+kernels_bandwidth.cpp:5:6: note: vectorized 1 loops in function.
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V8DF
+kernels_bandwidth.cpp:5:6: note: ***** The result for vector mode V64QI would be the same
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V32QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V32QI
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V16QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V16QI
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V8QI
+kernels_bandwidth.cpp:5:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels_bandwidth.cpp:5:6: note: ***** Analysis failed with vector mode V4QI

@@ -1,0 +1,2 @@
+float N=2048 stride=4: median 0.400225 microseconds/call; checks PASS
+double N=2048 stride=4: median 0.697823 microseconds/call; checks PASS

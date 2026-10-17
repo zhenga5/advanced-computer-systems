@@ -1,0 +1,34 @@
+kernels_stride.cpp:7:31: optimized: loop vectorized using 64 byte vectors
+kernels_stride.cpp:7:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels_stride.cpp:7:31: optimized: loop vectorized using 32 byte vectors
+kernels_stride.cpp:7:31: missed: couldn't vectorize loop
+kernels_stride.cpp:9:17: missed: not vectorized: no vectype for stmt: _3 = *_2;
+ scalar_type: const float
+kernels_stride.cpp:4:6: note: vectorized 1 loops in function.
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V16SF
+kernels_stride.cpp:4:6: note: ***** The result for vector mode V64QI would be the same
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V32QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V32QI
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V16QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V16QI
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V8QI
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V4QI
+kernels_stride.cpp:7:31: optimized: loop vectorized using 64 byte vectors
+kernels_stride.cpp:7:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels_stride.cpp:7:31: optimized: loop vectorized using 32 byte vectors
+kernels_stride.cpp:7:31: missed: couldn't vectorize loop
+kernels_stride.cpp:9:17: missed: not vectorized: no vectype for stmt: _3 = *_2;
+ scalar_type: const double
+kernels_stride.cpp:4:6: note: vectorized 1 loops in function.
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V8DF
+kernels_stride.cpp:4:6: note: ***** The result for vector mode V64QI would be the same
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V32QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V32QI
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V16QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V16QI
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V8QI
+kernels_stride.cpp:4:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels_stride.cpp:4:6: note: ***** Analysis failed with vector mode V4QI

@@ -1,0 +1,1 @@
+ALL STRIDE CHECKS PASSED (float/double, strides 1/2/4/8)

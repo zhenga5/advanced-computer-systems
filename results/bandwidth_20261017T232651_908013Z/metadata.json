@@ -1,0 +1,43 @@
+{
+  "status": "complete",
+  "started_utc": "2026-10-17T23:26:51.914508+00:00",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "logical_cpu": 0,
+  "jobs": [
+    [
+      1,
+      33554432
+    ],
+    [
+      2,
+      67108864
+    ],
+    [
+      2,
+      33554432
+    ],
+    [
+      2,
+      16777216
+    ],
+    [
+      1,
+      16777216
+    ],
+    [
+      1,
+      67108864
+    ]
+  ],
+  "binary_sha256": "98146d89130aca1568b1f3504a9c94273bf7fd63353ad00b31b5c1c5ffdc550f",
+  "useful_bytes_per_call": "3*N*sizeof(T)",
+  "timing": "steady_clock; calibrated >=30 ms batches (unless repetition cap reached); 7 trials",
+  "notes": [
+    "One thread; ordinary cached stores; initialization/validation excluded from timing.",
+    "Empirical useful bandwidth, not measured physical DRAM bandwidth or a universal hardware peak.",
+    "No cache flushing; repeated streaming over arrays larger than reported 96 MiB L3.",
+    "Use consistent useful-byte arithmetic intensity when comparing the multiply kernel.",
+    "Largest combined allocation is approximately 1.5 GiB; float and double run sequentially."
+  ],
+  "finished_utc": "2026-10-17T23:27:15.518445+00:00"
+}

@@ -1,0 +1,23 @@
+float
+  N=0  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=1  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=5  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=8  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=16  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=17  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=27  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=32  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=33  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=1000  AXPY=PASS  Multiply=PASS  Dot=PASS
+double
+  N=0  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=1  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=5  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=8  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=16  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=17  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=27  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=32  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=33  AXPY=PASS  Multiply=PASS  Dot=PASS
+  N=1000  AXPY=PASS  Multiply=PASS  Dot=PASS
+ALL CHECKS PASSED

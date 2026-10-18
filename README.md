@@ -6,7 +6,7 @@ This folder belongs inside the existing `project1-simd` repository. It supplemen
 
 - `SIMD_Project1_Report.pdf`: nine-page report for review.
 - `report.md`: editable Markdown text with relative figure links.
-- `figures/`: six report figures, each in PNG and PDF format.
+- `figures/`: six report figures
 - `data/`: selected raw measurements plus processed summaries.
 - `evidence/`: supplied environment, final ISA-run metadata, compiler report and inspected assembly.
 - `scripts/make_figures.py`: regenerate report figures and summaries from `data/`.
@@ -24,7 +24,7 @@ python3 project1_report/scripts/make_figures.py
 python3 project1_report/scripts/write_report.py
 ```
 
-NumPy, pandas and matplotlib are also required and were already installed for the experiments. Opening the supplied PDF does not require installing any of these packages. The report generator overwrites `report.md`; edit prose in `scripts/write_report.py` if regenerating. For manual-only Markdown edits, do not rerun that generator until the edits have been transferred.
+NumPy, pandas and matplotlib are also required and were already installed for the experiments
 
 ## Data provenance
 
@@ -36,7 +36,6 @@ NumPy, pandas and matplotlib are also required and were already installed for th
 | bandwidth.csv | Independent add calibration, 84 rows |
 | cycles.csv | Dedicated hardware-counter sweep, 504 rows |
 
-The incomplete stride upload measurements(4).csv and superseded two-build measurements(2).csv are not used in the final report. Original run directories contain additional source snapshots, raw process outputs, checks and metadata and should remain in the repository.
 
 ## Methodology notes
 

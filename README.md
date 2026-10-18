@@ -5,13 +5,9 @@ This folder belongs inside the existing `project1-simd` repository. It supplemen
 ## Contents
 
 - `SIMD_Project1_Report.pdf`: nine-page report for review.
-- `report.md`: editable Markdown text with relative figure links.
 - `figures/`: six report figures
 - `data/`: selected raw measurements plus processed summaries.
 - `evidence/`: supplied environment, final ISA-run metadata, compiler report and inspected assembly.
-- `scripts/make_figures.py`: regenerate report figures and summaries from `data/`.
-- `scripts/write_report.py`: regenerate the Markdown and PDF report; prose is defined in this script.
-- `manifest.json`: source mapping and SHA-256 checksums for the included raw data/evidence.
 
 ## Reproduce the report
 

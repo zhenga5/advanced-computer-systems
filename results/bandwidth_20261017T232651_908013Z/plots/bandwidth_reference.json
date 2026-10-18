@@ -1,0 +1,18 @@
+{
+  "selection": "Median of two process-run medians at N=67108864, seven trials per run",
+  "interpretation": "Empirical single-thread cached-store useful-bandwidth reference. Not physical DRAM counters or a universal peak.",
+  "reference": {
+    "float": {
+      "useful_bandwidth_gib_s": 40.92645324774686,
+      "useful_bandwidth_gb_s": 43.94444456008644,
+      "multiply_ai_flops_per_useful_byte": 0.08333333333333333,
+      "multiply_memory_reference_gflops": 3.66203704667387
+    },
+    "double": {
+      "useful_bandwidth_gib_s": 40.56148883812478,
+      "useful_bandwidth_gb_s": 43.55256700920374,
+      "multiply_ai_flops_per_useful_byte": 0.041666666666666664,
+      "multiply_memory_reference_gflops": 1.814690292050156
+    }
+  }
+}

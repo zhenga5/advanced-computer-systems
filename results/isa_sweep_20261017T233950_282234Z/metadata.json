@@ -1,0 +1,67 @@
+{
+  "started_utc": "20261017T233950_282234Z",
+  "git_commit": "77f8fc15eab74b7bb0df49a6df6ac6f5a83dd840",
+  "git_status_before_run": " M evidence/cpu.txt\n?? build_default.sh\n?? build_default.sh:Zone.Identifier\n?? evidence/check_default.txt\n?? evidence/default_target.txt\n?? evidence/isa_auto.asm\n?? evidence/isa_default.asm\n?? evidence/isa_scalar.asm\n?? evidence/vectorization_default.txt\n?? plot_bandwidth.py\n?? plot_bandwidth.py:Zone.Identifier\n?? results/bandwidth_20261017T232651_908013Z/plots/\n?? run_isa_sweep.py\n?? run_isa_sweep.py:Zone.Identifier\n",
+  "selected_logical_cpu": 0,
+  "original_allowed_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "sizes": [
+    1024,
+    2048,
+    4096,
+    8192,
+    16384,
+    32768,
+    65536,
+    131072,
+    262144,
+    524288,
+    1048576,
+    2097152,
+    4194304,
+    8388608,
+    16777216,
+    33554432
+  ],
+  "kernels": [
+    "multiply",
+    "axpy",
+    "dot"
+  ],
+  "builds": [
+    "scalar",
+    "default",
+    "auto"
+  ],
+  "trials_per_configuration": 7,
+  "calibration_target_seconds": 0.03,
+  "default_build": "GCC default target, -O3 -ffp-contract=off; no march/mtune override",
+  "auto_build": "CPU-targeted native auto-vectorization, not generic default ISA",
+  "axpy_method": "Alternate +0.5 and -0.5; each call counts separately",
+  "dot_inputs": "x = i % 7 - 3; y = 1 + i % 5; bounded exact reference",
+  "bandwidth_definition": "Useful algorithm bytes/time, not measured DRAM traffic",
+  "binary_sha256": {
+    "bench_all_scalar": "834eb2e65c707b1cb9b0d4ccca792b5a5957b750dfc7f864741c1b4f8907f2ee",
+    "bench_all_default": "e1aeeaec3aad73c00a8a1f1f9b2e318731d944f20c1658d75721e44eab31c0a9",
+    "bench_all_auto": "eadf8b8716b856bdbfc419e49bf72da7cc915c0fd17372e65a8ba9412dca8c35"
+  },
+  "completed": true,
+  "completed_utc": "2026-10-17T23:42:24.403290+00:00",
+  "measurement_rows": 2016
+}

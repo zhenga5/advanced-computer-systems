@@ -1,0 +1,15 @@
+perf version 6.8.12
+multiply float: median 77.4337 microseconds/call
+multiply double: median 154.986 microseconds/call
+
+ Performance counter stats for './build/bench_all_auto multiply 1048576':
+
+        4304372177      cycles:u                                                              
+        4758445017      instructions:u                   #    1.11  insn per cycle            
+
+       0.803734266 seconds time elapsed
+
+       0.791664000 seconds user
+       0.012055000 seconds sys
+
+

@@ -1,0 +1,57 @@
+{
+  "started_utc": "20261017T234824_211968Z",
+  "git_commit": "77f8fc15eab74b7bb0df49a6df6ac6f5a83dd840",
+  "git_status_before_run": " M evidence/cpu.txt\n?? benchmark_cycles.cpp\n?? benchmark_cycles.cpp:Zone.Identifier\n?? build_cycles.sh\n?? build_cycles.sh:Zone.Identifier\n?? build_default.sh\n?? build_default.sh:Zone.Identifier\n?? cycle_counter.hpp\n?? cycle_counter.hpp:Zone.Identifier\n?? evidence/check_default.txt\n?? evidence/cycles_smoke.csv\n?? evidence/default_target.txt\n?? evidence/isa_auto.asm\n?? evidence/isa_default.asm\n?? evidence/isa_scalar.asm\n?? evidence/perf_availability.txt\n?? evidence/perf_counter_check.txt\n?? evidence/vectorization_default.txt\n?? plot_bandwidth.py\n?? plot_bandwidth.py:Zone.Identifier\n?? results/bandwidth_20261017T232651_908013Z/plots/\n?? results/isa_sweep_20261017T233950_282234Z/\n?? run_cycles.py\n?? run_cycles.py:Zone.Identifier\n?? run_isa_sweep.py\n?? run_isa_sweep.py:Zone.Identifier\n",
+  "selected_logical_cpu": 0,
+  "original_allowed_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "sizes": [
+    1024,
+    32768,
+    1048576,
+    33554432
+  ],
+  "kernels": [
+    "multiply",
+    "axpy",
+    "dot"
+  ],
+  "builds": [
+    "scalar",
+    "default",
+    "auto"
+  ],
+  "trials_per_configuration": 7,
+  "calibration_target_seconds": 0.03,
+  "default_build": "GCC default target, -O3 -ffp-contract=off; no march/mtune override",
+  "auto_build": "CPU-targeted native auto-vectorization, not generic default ISA",
+  "axpy_method": "Alternate +0.5 and -0.5; each call counts separately",
+  "dot_inputs": "x = i % 7 - 3; y = 1 + i % 5; bounded exact reference",
+  "bandwidth_definition": "Useful algorithm bytes/time, not measured DRAM traffic",
+  "binary_sha256": {
+    "bench_cycles_scalar": "3dd91b529bb6d3e2b3079085bad987ee21f9a137ef69785248e5ea42553dad5e",
+    "bench_cycles_default": "e6c4fea36e8d356b1f788e0ec77ebc077741e198e7ceb348d7b140bb8fbecea2",
+    "bench_cycles_auto": "61618159208db885365f7673d9e91d954abf60697f416b4a5fbf71d6e8160969"
+  },
+  "counter_scope": "User-mode thread cycles for kernel batch plus loop/call/timer overhead; excludes initialization, validation, calibration and warmups",
+  "counter_method": "perf_event_open, fresh pinned CPU_CYCLES per trial, running fraction >=99%, raw unscaled counts",
+  "completed": true,
+  "completed_utc": "2026-10-17T23:49:10.916985+00:00",
+  "measurement_rows": 504
+}

@@ -8,7 +8,8 @@ This folder belongs inside the existing `project1-simd` repository. It supplemen
 - `figures/`: six report figures
 - `data/`: selected raw measurements plus processed summaries.
 - `evidence/`: supplied environment, final ISA-run metadata, compiler report and inspected assembly.
-
+- `scripts/make_figures.py`: regenerate report figures and summaries from `data/`.
+- `scripts/write_report.py`: regenerate the Markdown and PDF report; prose is defined in this script.
 ## Reproduce the report
 
 From the repository root, using the existing virtual environment:

@@ -1,0 +1,42 @@
+kernels.cpp:5:31: optimized: loop vectorized using 16 byte vectors
+kernels.cpp:5:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels.cpp:5:31: optimized: loop vectorized using 8 byte vectors
+kernels.cpp:4:6: note: vectorized 1 loops in function.
+kernels.cpp:4:6: note: ***** Analysis failed with vector mode V4SF
+kernels.cpp:4:6: note: ***** The result for vector mode V16QI would be the same
+kernels.cpp:4:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels.cpp:4:6: note: ***** Analysis failed with vector mode V8QI
+kernels.cpp:4:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels.cpp:4:6: note: ***** Analysis failed with vector mode V4QI
+kernels.cpp:5:31: optimized: loop vectorized using 16 byte vectors
+kernels.cpp:5:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels.cpp:4:6: note: vectorized 1 loops in function.
+kernels.cpp:8:1: note: ***** Analysis failed with vector mode V2DF
+kernels.cpp:8:1: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF
+kernels.cpp:12:31: optimized: loop vectorized using 16 byte vectors
+kernels.cpp:12:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels.cpp:12:31: optimized: loop vectorized using 8 byte vectors
+kernels.cpp:11:6: note: vectorized 1 loops in function.
+kernels.cpp:11:6: note: ***** Analysis failed with vector mode V4SF
+kernels.cpp:11:6: note: ***** The result for vector mode V16QI would be the same
+kernels.cpp:11:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels.cpp:11:6: note: ***** Analysis failed with vector mode V8QI
+kernels.cpp:11:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels.cpp:11:6: note: ***** Analysis failed with vector mode V4QI
+kernels.cpp:12:31: optimized: loop vectorized using 16 byte vectors
+kernels.cpp:12:31: optimized:  loop versioned for vectorization because of possible aliasing
+kernels.cpp:11:6: note: vectorized 1 loops in function.
+kernels.cpp:11:6: note: ***** Analysis failed with vector mode V2DF
+kernels.cpp:11:6: note: ***** The result for vector mode V16QI would be the same
+kernels.cpp:11:6: note: ***** Re-trying analysis with vector mode V8QI
+kernels.cpp:11:6: note: ***** Analysis failed with vector mode V8QI
+kernels.cpp:11:6: note: ***** Re-trying analysis with vector mode V4QI
+kernels.cpp:11:6: note: ***** Analysis failed with vector mode V4QI
+kernels.cpp:20:31: optimized: loop vectorized using 16 byte vectors
+kernels.cpp:18:3: note: vectorized 1 loops in function.
+kernels.cpp:23:12: note: ***** Analysis failed with vector mode V4SF
+kernels.cpp:23:12: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+kernels.cpp:20:31: optimized: loop vectorized using 16 byte vectors
+kernels.cpp:18:3: note: vectorized 1 loops in function.
+kernels.cpp:23:12: note: ***** Analysis failed with vector mode V2DF
+kernels.cpp:23:12: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF

@@ -1,0 +1,38 @@
+=== Compiler version ===
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+=== perf version ===
+WARNING: perf not found for kernel 6.18.33.2-microsoft
+
+  You may need to install the following packages for this specific kernel:
+    linux-tools-6.18.33.2-microsoft-standard-WSL2
+    linux-cloud-tools-6.18.33.2-microsoft-standard-WSL2
+
+  You may also want to install one of the following packages to keep up to date:
+    linux-tools-standard-WSL2
+    linux-cloud-tools-standard-WSL2
+=== perf permissions ===
+2
+=== Hardware counter test ===
+WARNING: perf not found for kernel 6.18.33.2-microsoft
+
+  You may need to install the following packages for this specific kernel:
+    linux-tools-6.18.33.2-microsoft-standard-WSL2
+    linux-cloud-tools-6.18.33.2-microsoft-standard-WSL2
+
+  You may also want to install one of the following packages to keep up to date:
+    linux-tools-standard-WSL2
+    linux-cloud-tools-standard-WSL2
+=== TLB counter test ===
+WARNING: perf not found for kernel 6.18.33.2-microsoft
+
+  You may need to install the following packages for this specific kernel:
+    linux-tools-6.18.33.2-microsoft-standard-WSL2
+    linux-cloud-tools-6.18.33.2-microsoft-standard-WSL2
+
+  You may also want to install one of the following packages to keep up to date:
+    linux-tools-standard-WSL2
+    linux-cloud-tools-standard-WSL2

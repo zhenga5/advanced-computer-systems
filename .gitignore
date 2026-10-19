@@ -1,6 +1,9 @@
-.venv/
-__pycache__/
+**/bin/
+**/.venv/
+**/venv/
+**/__pycache__/
 *.pyc
-build/
-# Windows download metadata
+*.o
 *:Zone.Identifier
+.DS_Store
+Thumbs.db

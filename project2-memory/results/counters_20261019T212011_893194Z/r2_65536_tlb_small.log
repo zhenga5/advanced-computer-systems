@@ -1,0 +1,1 @@
+Command: taskset -c 0 ./bin/latency_counters small 65536 tlb 5 8000000

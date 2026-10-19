@@ -1,0 +1,15 @@
+=== Base page size ===
+4096
+=== Transparent huge pages ===
+always [madvise] never
+always defer defer+madvise [madvise] never
+=== Huge-page memory information ===
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:    120832 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB

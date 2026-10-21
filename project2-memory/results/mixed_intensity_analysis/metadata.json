@@ -1,0 +1,168 @@
+{
+  "utc_start": "20261021T194059_008706Z",
+  "smoke": false,
+  "case_order": [
+    [
+      2,
+      0
+    ],
+    [
+      5,
+      100
+    ],
+    [
+      2,
+      70
+    ],
+    [
+      7,
+      70
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      3,
+      70
+    ],
+    [
+      6,
+      50
+    ],
+    [
+      6,
+      100
+    ],
+    [
+      3,
+      50
+    ],
+    [
+      4,
+      70
+    ],
+    [
+      0,
+      50
+    ],
+    [
+      1,
+      70
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      6,
+      70
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      4,
+      50
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      1,
+      100
+    ],
+    [
+      5,
+      70
+    ],
+    [
+      2,
+      50
+    ],
+    [
+      2,
+      100
+    ],
+    [
+      1,
+      50
+    ],
+    [
+      5,
+      50
+    ],
+    [
+      3,
+      100
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      4,
+      100
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      0,
+      70
+    ],
+    [
+      7,
+      50
+    ],
+    [
+      0,
+      100
+    ],
+    [
+      7,
+      100
+    ]
+  ],
+  "probe_cpu": 0,
+  "load_cpus": [
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14
+  ],
+  "buffer_mib_per_thread": 512,
+  "window_seconds": 2,
+  "trials": 5,
+  "load_read_percents": [
+    100,
+    70,
+    50,
+    0
+  ],
+  "swap_before": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "mem_available_kib": 14806704,
+  "topology": "CPU CORE SOCKET NODE ONLINE\n  0    0      0    0    yes\n  1    0      0    0    yes\n  2    1      0    0    yes\n  3    1      0    0    yes\n  4    2      0    0    yes\n  5    2      0    0    yes\n  6    3      0    0    yes\n  7    3      0    0    yes\n  8    4      0    0    yes\n  9    4      0    0    yes\n 10    5      0    0    yes\n 11    5      0    0    yes\n 12    6      0    0    yes\n 13    6      0    0    yes\n 14    7      0    0    yes\n 15    7      0    0    yes\n",
+  "kernel": "Linux Andrew 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "src/loaded_latency_mixed.cpp_sha256": "f173d8d49e358b7e7d1c14edd13b753e2f446f02e02f44a2a00ba21f4697017a",
+  "bin/loaded_latency_mixed_sha256": "f9d68588350acfaf0fe70c80e71aa1c973a143671a31a5636925bb969a8f41ac",
+  "swap_after": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "guest_swap_activity": false
+}

@@ -1,0 +1,35 @@
+=== CPU topology ===
+CPU CORE SOCKET NODE ONLINE
+  0    0      0    0    yes
+  1    0      0    0    yes
+  2    1      0    0    yes
+  3    1      0    0    yes
+  4    2      0    0    yes
+  5    2      0    0    yes
+  6    3      0    0    yes
+  7    3      0    0    yes
+  8    4      0    0    yes
+  9    4      0    0    yes
+ 10    5      0    0    yes
+ 11    5      0    0    yes
+ 12    6      0    0    yes
+ 13    6      0    0    yes
+ 14    7      0    0    yes
+ 15    7      0    0    yes
+=== SMT sibling groups ===
+cpu0: 0-1
+cpu1: 0-1
+cpu10: 10-11
+cpu11: 10-11
+cpu12: 12-13
+cpu13: 12-13
+cpu14: 14-15
+cpu15: 14-15
+cpu2: 2-3
+cpu3: 2-3
+cpu4: 4-5
+cpu5: 4-5
+cpu6: 6-7
+cpu7: 6-7
+cpu8: 8-9
+cpu9: 8-9

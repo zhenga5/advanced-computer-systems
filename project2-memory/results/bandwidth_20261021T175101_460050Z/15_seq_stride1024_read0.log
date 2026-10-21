@@ -1,0 +1,1 @@
+Command: taskset -c 0 ./bin/bandwidth 4096 seq 1024 0 5

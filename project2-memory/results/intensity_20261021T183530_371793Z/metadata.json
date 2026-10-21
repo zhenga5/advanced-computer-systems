@@ -1,0 +1,43 @@
+{
+  "utc_start": "20261021T183530_371793Z",
+  "smoke": false,
+  "load_thread_order": [
+    3,
+    4,
+    6,
+    7,
+    2,
+    5,
+    0,
+    1
+  ],
+  "probe_cpu": 0,
+  "load_cpus": [
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14
+  ],
+  "buffer_mib_per_thread": 512,
+  "window_seconds": 2,
+  "trials": 5,
+  "load_read_percent": 100,
+  "swap_before": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "mem_available_kib": 14822072,
+  "topology": "CPU CORE SOCKET NODE ONLINE\n  0    0      0    0    yes\n  1    0      0    0    yes\n  2    1      0    0    yes\n  3    1      0    0    yes\n  4    2      0    0    yes\n  5    2      0    0    yes\n  6    3      0    0    yes\n  7    3      0    0    yes\n  8    4      0    0    yes\n  9    4      0    0    yes\n 10    5      0    0    yes\n 11    5      0    0    yes\n 12    6      0    0    yes\n 13    6      0    0    yes\n 14    7      0    0    yes\n 15    7      0    0    yes\n",
+  "kernel": "Linux Andrew 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "src/loaded_latency.cpp_sha256": "6c14f6cc0f98f96859a605764d77dbcac8f561b4cc9082a98ea84b617e2f6a4e",
+  "bin/loaded_latency_sha256": "5a4e21aed082bf7c7e369da520b7742ea8ae37369630e479fefa378d3a6728d2",
+  "swap_after": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "guest_swap_activity": false
+}

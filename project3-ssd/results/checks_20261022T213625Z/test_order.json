@@ -1,0 +1,437 @@
+[
+  [
+    "queue_randread_qd1_rep1",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_write_qd16_rep1",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_randread_qd128_rep1",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 128
+    }
+  ],
+  [
+    "mix_read100_rep1",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 100
+    }
+  ],
+  [
+    "queue_randwrite_qd16_rep1",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_randwrite_qd8_rep1",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "queue_read_qd8_rep1",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "queue_read_qd1_rep1",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "mix_read70_rep1",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 70
+    }
+  ],
+  [
+    "queue_write_qd1_rep1",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "working_set_1G_rep1",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 16,
+      "size": "1G"
+    }
+  ],
+  [
+    "queue_randread_qd16_rep1",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "mix_read0_rep1",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 0
+    }
+  ],
+  [
+    "mix_read50_rep1",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 50
+    }
+  ],
+  [
+    "queue_read_qd16_rep1",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_write_qd8_rep1",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "queue_randwrite_qd1_rep1",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_read_qd16_rep2",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_read_qd1_rep2",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_write_qd16_rep2",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_randwrite_qd1_rep2",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_write_qd8_rep2",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "queue_randread_qd128_rep2",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 128
+    }
+  ],
+  [
+    "queue_randwrite_qd16_rep2",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "mix_read50_rep2",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 50
+    }
+  ],
+  [
+    "mix_read0_rep2",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 0
+    }
+  ],
+  [
+    "working_set_1G_rep2",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 16,
+      "size": "1G"
+    }
+  ],
+  [
+    "mix_read100_rep2",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 100
+    }
+  ],
+  [
+    "queue_randwrite_qd8_rep2",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "mix_read70_rep2",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 70
+    }
+  ],
+  [
+    "queue_randread_qd16_rep2",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_write_qd1_rep2",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_randread_qd1_rep2",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_read_qd8_rep2",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "mix_read0_rep3",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 0
+    }
+  ],
+  [
+    "queue_read_qd8_rep3",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "queue_randread_qd1_rep3",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_read_qd1_rep3",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_write_qd1_rep3",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_randwrite_qd1_rep3",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 1
+    }
+  ],
+  [
+    "queue_randread_qd128_rep3",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 128
+    }
+  ],
+  [
+    "queue_randwrite_qd8_rep3",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "mix_read70_rep3",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 70
+    }
+  ],
+  [
+    "mix_read50_rep3",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 50
+    }
+  ],
+  [
+    "queue_randwrite_qd16_rep3",
+    {
+      "rw": "randwrite",
+      "bs": "4k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_randread_qd16_rep3",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "queue_write_qd8_rep3",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 8
+    }
+  ],
+  [
+    "queue_read_qd16_rep3",
+    {
+      "rw": "read",
+      "bs": "128k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "working_set_1G_rep3",
+    {
+      "rw": "randread",
+      "bs": "4k",
+      "iodepth": 16,
+      "size": "1G"
+    }
+  ],
+  [
+    "mix_read100_rep3",
+    {
+      "rw": "randrw",
+      "bs": "4k",
+      "iodepth": 16,
+      "rwmixread": 100
+    }
+  ],
+  [
+    "queue_write_qd16_rep3",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 16
+    }
+  ],
+  [
+    "sustained_write",
+    {
+      "rw": "write",
+      "bs": "128k",
+      "iodepth": 16,
+      "runtime": 120,
+      "ramp_time": 0,
+      "write_bw_log": "/home/andrew/advanced-computer-systems/project3-ssd/results/checks_20261022T213625Z/sustained",
+      "log_avg_msec": 1000
+    }
+  ]
+]

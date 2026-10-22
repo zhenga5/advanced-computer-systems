@@ -1,0 +1,19 @@
+{
+  "data/axpy.csv": "ed2ef1a557d220a254cf20eef7901193497dc96b67b81e0c4b6c610492b66b91",
+  "data/axpy_metadata.json": "9f57c915ecde169a6dcc313bd15055b712444e57ea12475e0369a3f0d4f55269",
+  "data/bandwidth.csv": "375cc7c39a28ac1ff43577f2abb4e7765c21de039386a93e6aba4b695a8f86c7",
+  "data/bandwidth_metadata.json": "f1ef038558edb78215427e16b93043b5108431053adc57f7ec445d4bbf9f8452",
+  "data/configuration_notes.txt": "ec7b24645b0c536432e2e1bbcc55386fab1c515f7deb33956fb461d5011594fb",
+  "data/intensity_mixed.csv": "0f366625fecc12f600960df76fcfe354ea8e3f0276bdb59acb3b70d15391d3bb",
+  "data/intensity_mixed_metadata.json": "acdbdfecec4ef82d22ca0ae51a17f642bf12df43954b92c37f9604ad4efbabeb",
+  "data/intensity_read.csv": "fb6f7275190b107d2c99aaf2c0348f138201f802f5a40a3eb6ccf0e192f6a8e8",
+  "data/intensity_read_metadata.json": "3553ef99ec7f0822d6663fa6b0b0fed6c124d1089907dfab2f08ecb0e642568c",
+  "data/latency_pages_huge.csv": "aaf19545b803e17db3ee690ae8bb67dbac01f9762dc21ddb979ee4d100d13d1a",
+  "data/latency_pages_huge_repeat.csv": "70c46fd56443c0ba9fb53f8176d22c2aed9c61a6fbb14e2e79297a8392f8f060",
+  "data/latency_pages_small.csv": "8330c7234011ddb33dd9dcee9f37a711453e973ae84e8f2e4f145f0e1df45713",
+  "data/latency_pages_small_repeat.csv": "d97819f16ad55840d2fb237f7c6c9b6bb91863dbb3e0e6b65f98a0ce037b9710",
+  "data/latency_sweep.csv": "265716528a7c584b36dca3ae4b3f93787877b7d8b3b9ad328f04e305f4056bf9",
+  "data/page_counters.csv": "400eb0ca66d1050134219bbaa42540a253b11091ff9c083e0b77966c3a506370",
+  "data/pattern_latency.csv": "e439d5ce2e91a8848fbbaabc0b4588e99129c70a3108aa204823a3d066d67dc6",
+  "data/pattern_latency_metadata.json": "9406b7337551ace8304aff8100daa42ef2a5c0a88aad8ea4f0a7b7b40224e570"
+}

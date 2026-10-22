@@ -1,0 +1,11 @@
+Source: terminal output and statements supplied by Andrew Zheng in this conversation.
+CPU: AMD Ryzen 7 9850X3D, 8 cores, 16 logical CPUs.
+L1d 48 KiB/core, L2 1 MiB/core, L3 96 MiB shared (lscpu).
+Ubuntu 24.04.5 LTS; WSL2 kernel 6.18.33.2-microsoft-standard-WSL2.
+Guest memory: approximately 15 GiB; swap 4 GiB. Physical RAM: user reported 32 GB; effective memory speed not captured.
+SMT active: 1. Guest NUMA: one node, CPUs 0-15.
+No readable scaling driver/governor files at checked guest cpufreq paths.
+BIOS CPU/memory settings unchanged throughout Project 2 (user confirmation); actual BIOS values and host power plan not captured.
+Base page size: 4096 bytes. THP enabled: madvise. THP defrag: madvise. Hugepagesize: 2048 kB. Reserved HugePages_Total: 0.
+perf_event_paranoid: 2. Direct perf binary version: 6.8.12, path /usr/lib/linux-tools/6.8.0-147-generic/perf.
+This note transcribes supplied evidence; original terminal files remain in the project results directory.

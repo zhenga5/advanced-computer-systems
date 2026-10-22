@@ -1,0 +1,50 @@
+{
+  "utc_start": "20261022T021618_143452Z",
+  "smoke": false,
+  "case_order": [
+    [
+      "random",
+      64
+    ],
+    [
+      "seq",
+      256
+    ],
+    [
+      "seq",
+      1024
+    ],
+    [
+      "random",
+      256
+    ],
+    [
+      "seq",
+      64
+    ],
+    [
+      "random",
+      1024
+    ]
+  ],
+  "cpu": 0,
+  "span_mib": 4096,
+  "trials": 5,
+  "loads_per_trial": 8000000,
+  "seed": 42,
+  "swap_before": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "mem_available_kib": 14795484,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "kernel": "Linux Andrew 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "topology": "CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE\n  0    0      0    0 0:0:0:0          yes\n  1    0      0    0 0:0:0:0          yes\n  2    0      0    1 1:1:1:0          yes\n  3    0      0    1 1:1:1:0          yes\n  4    0      0    2 2:2:2:0          yes\n  5    0      0    2 2:2:2:0          yes\n  6    0      0    3 3:3:3:0          yes\n  7    0      0    3 3:3:3:0          yes\n  8    0      0    4 4:4:4:0          yes\n  9    0      0    4 4:4:4:0          yes\n 10    0      0    5 5:5:5:0          yes\n 11    0      0    5 5:5:5:0          yes\n 12    0      0    6 6:6:6:0          yes\n 13    0      0    6 6:6:6:0          yes\n 14    0      0    7 7:7:7:0          yes\n 15    0      0    7 7:7:7:0          yes\n",
+  "src/pattern_latency.cpp_sha256": "105925ce4cf79df123673455122e1287a99853b9c416646937f1bb6bcea25d63",
+  "bin/pattern_latency_sha256": "142685d5ab80e0b5c16bc09f55e0e25fde09a10f643e14857b9e178811327d7a",
+  "swap_after": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "guest_swap_activity": false
+}

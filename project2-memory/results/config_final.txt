@@ -1,0 +1,6 @@
+=== CPU frequency policy exposed to WSL ===
+=== SMT state ===
+1
+=== NUMA configuration ===
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-15

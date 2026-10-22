@@ -172,6 +172,10 @@ The main findings were that small data sets were faster, sequential access worke
 
 The additional plots are kept as supporting results even though only two appear here.
 
+## Use of Artificial Intelligence (AI)
+
+Through the use of ChatGPT, I was able to teach myself about learning technical skills and details regarding Cache and Memory performance profiling. It was helpful in tweaking benchmarks and drawing conclusions about my work. Some things that I didn't understand were omitted from the report as I felt I could not grasp the AI's analysis. This left only the charts and data I did understand to be documented in the report. Overall AI was a very helpful tool in leveraging my way out of being stuck or confused.
+
 ## References
 
 1. Linux man-pages, [perf_event_open](https://man7.org/linux/man-pages/man2/perf_event_open.2.html).

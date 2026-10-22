@@ -2,51 +2,65 @@
 
 Andrew Zheng | Advanced Computer Systems | Project 1 | October 17, 2026
 
-## Purpose and principal findings
+## Purpose
 
-This project measures when compiler-generated SIMD improves single-thread numeric kernels and when wider vectors offer little benefit. Elementwise multiplication, AXPY and dot product were tested with float32 and float64 across cache-sized and larger-than-cache arrays. Scalar, GCC-default auto-vectorized and CPU-targeted native builds use the same kernel source.
+This project tests when SIMD makes a program faster. SIMD lets one instruction work on several numbers at once. The tests compare three versions of the same code: a scalar version, which uses scalar arithmetic, a version with the compiler's default vectorization, and a native version built for this CPU.
 
-For N=1,024, native SIMD gives 6.00x speedup for float multiply and 8.69x for float AXPY. At N=33,554,432, those speedups shrink to 1.23x and 1.59x. Double multiply and AXPY show approximately 1x speedup at the largest size. Dot product remains close to scalar because its observed vector multiplication feeds a serial accumulation chain. Thus, a vectorization report alone does not establish a useful speedup.
+The main finding was that SIMD helped multiplication and AXPY most with small arrays. With large arrays, moving data became more important and the speedup was smaller. Dot product showed little improvement because adding the products together still involved a chain of dependent operations.
 
-## Measured platform and recorded environment
+## Computer and setup
 
-| Item | Recorded value |
+| Item | Setup |
 | --- | --- |
-| Processor | AMD Ryzen 7 9850X3D; 8 cores, 16 logical CPUs |
-| Caches | L1D: 48 KiB/core; L2: 1 MiB/core; L3: 96 MiB shared |
-| ISA exposed to guest | x86-64, SSE, AVX2, AVX-512 and FMA |
-| OS / virtualization | Ubuntu 24.04.5 LTS; Microsoft WSL2 |
-| Kernel | 6.18.33.2-microsoft-standard-WSL2 |
-| Compiler | GCC 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1) |
-| Execution policy | One benchmark thread; final ISA sweep pinned to logical CPU 0 |
-| SMT / power snapshot | SMT active; Windows Balanced power scheme |
-| Frequency policy | Linux cpufreq policy unavailable; operating frequency not logged |
+| CPU | AMD Ryzen 7 9850X3D, 8 cores and 16 logical CPUs |
+| Cache | 48 KiB L1 data cache per core, 1 MiB L2 per core, 96 MiB shared L3 |
+| Available instructions | x86-64, SSE, AVX2, AVX-512, and FMA |
+| OS | Ubuntu 24.04.5 LTS in WSL2 |
+| Kernel | `6.18.33.2-microsoft-standard-WSL2` |
+| Compiler | GCC 13.3.0 |
+| Threads | One benchmark thread; final build comparison pinned to CPU 0 |
+| Other settings | SMT enabled; Windows Balanced power plan in the recorded snapshot |
+| Frequency | Linux frequency controls unavailable; operating frequency not recorded |
 
-The environment snapshot was collected after the experiments and is not proof that every earlier run used identical settings. The virtual CPU affinity does not reserve a physical core, disable its SMT sibling, or control Windows scheduling. BIOS and power-policy continuity between separate datasets was not independently verified.
+The system snapshot was collected after the experiments. It does not prove that every earlier run used the same settings. CPU pinning reduces movement between guest CPUs, but it does not reserve a physical core or stop Windows background activity. BIOS and power settings were not confirmed to be unchanged across all runs.
 
-## Dataset scope
+## What was tested
 
-The analysis uses 2,016 final ISA-sweep trials, 1,008 alignment/tail trials, 896 stride trials, 84 bandwidth-calibration trials and 504 counter trials: 4,508 recorded batch measurements. The earlier two-build sweep is superseded by the final three-build sweep for baseline comparisons. Raw data and processed summaries are retained in this repository.
+The tests used both `float` and `double`. A float takes 4 bytes and a double takes 8 bytes. The same vector can therefore hold twice as many floats as doubles.
 
-## Methodology and vectorization evidence
+| Kernel | Operation | Work per element | Useful bytes per element |
+| --- | --- | ---: | ---: |
+| Multiply | `z[i] = x[i] * y[i]` | 1 floating-point operation | 3T |
+| AXPY | `y[i] += a * x[i]` | 2 floating-point operations | 3T |
+| Dot product | `sum += x[i] * y[i]` | 2 floating-point operations | 2T |
 
-Kernels are compiled separately from the timing harness, without link-time optimization. All kernels use -O3 and -ffp-contract=off. The scalar build adds -march=native -fno-tree-loop-vectorize -fno-tree-slp-vectorize; the default build has no -march/-mtune override; the native-auto build adds -march=native. The common harness uses -O2 and the correctness checker uses -O0.
+Here, T is 4 bytes for float or 8 bytes for double. Useful bytes count the reads and writes needed by the calculation, not all traffic inside the hardware. Multiply stores three arrays, while AXPY and dot product each store two. The combined array size is the working set.
 
-Timing uses std::chrono::steady_clock. Repetition counts double until a batch reaches approximately 30 ms (or the repetition cap); seven batch-average trials are retained. Two warmup calls precede each trial. Allocation, initialization, validation and CSV output are excluded from the timed batch. The ISA sweep rotates kernel/build ordering and covers powers of two from 2^10 through 2^25. Alignment and stride runners vary configuration order and pin to an allowed logical CPU.
+The final data contains 4,508 batch measurements: 2,016 for the three-build comparison, 1,008 for alignment and leftover elements, 896 for stride, 84 for bandwidth calibration, and 504 for hardware counters. Earlier two-build results were not used as the final baseline.
 
-| Kernel | Operation | FLOP/element | Useful bytes/element |
-| --- | --- | --- | --- |
-| Multiply | `z[i] = x[i] * y[i]` | 1 | 3T |
-| AXPY | `y[i] += a * x[i]` | 2 | 3T |
-| Dot | `sum += x[i] * y[i]` | 2 (convention) | 2T |
+## Build and timing method
 
-T is the element size in bytes. Footprint counts unique arrays: 3NT for multiply and 2NT for AXPY/dot. Useful bandwidth counts algorithmic reads/writes, not physical DRAM traffic. GFLOP/s = N x FLOP/element / seconds / 10^9; GiB/s = useful bytes / seconds / 2^30. Speedup is the ratio of scalar and vector-build median times at matching kernel, type and N.
+All three kernel builds used `-O3`. The main differences were:
 
-Multiply uses small positive integer-valued inputs. AXPY alternates a=+0.5 and -0.5 to restore y without timed reset copies; its intermediate result is checked too. Dot uses x[i]=(i mod 7)-3 and y[i]=1+(i mod 5), whose product sum over 35 elements is zero. The bounded exact reference avoids float accumulation overflow/precision drift in this test. Correctness checks cover N=0,1,5,8,16,17,27,32,33,1000 for both types.
+| Build | Main setting |
+| --- | --- |
+| Scalar | `-march=native -fno-tree-loop-vectorize -fno-tree-slp-vectorize` |
+| Default | Compiler vectorization enabled without a CPU-specific target |
+| Native | Compiler vectorization enabled with `-march=native` |
 
-## Evidence from compiler reports and inspected assembly
+All builds also used `-ffp-contract=off`, which prevented the compiler from combining multiply and add into an FMA instruction. The timing code was built separately with `-O2`, and the correctness checker used `-O0`. Link-time optimization was not used.
 
-The default compiler report identifies 16-byte vectorization; native multiply/AXPY assembly shows 64-byte ZMM operations. The scalar designation means scalar arithmetic, even when instructions use XMM registers. No FMA is present in the inspected AXPY loop, consistent with disabled contraction. Selected native float instructions are:
+Each timed batch repeated the kernel until it lasted about 30 ms, or reached the repetition limit. Seven trials were kept, with two warmup calls before each trial. Allocation, initialization, correctness checks, and writing CSV files were outside the timed batch. The final comparison tested array lengths from 2^10 through 2^25 and rotated the order of the builds and kernels.
+
+The tables use medians. Plot ranges show the minimum and maximum results, not confidence intervals. Speedup is calculated as scalar median time divided by vector-build median time. A speedup of 2 means twice as fast; a value below 1 means slower.
+
+Correctness checks covered lengths 0, 1, 5, 8, 16, 17, 27, 32, 33, and 1000 for both types. Inputs were chosen so repeated calculations could be checked reliably. AXPY alternated positive and negative coefficients to return the output to its starting value. Dot product used a repeating input pattern to keep the sum from growing too large.
+
+## Checking that SIMD was used
+
+The compiler reports showed 16-byte vectors for the default build. The inspected native multiply and AXPY code used 64-byte vectors. A compiler report alone does not show whether the full calculation becomes faster, so the generated assembly was also inspected.
+
+The following are shortened examples from the native float code:
 
 ```asm
 multiply: vmovups zmm1, [x]    vmulps zmm0, zmm1, [y]
@@ -55,119 +69,140 @@ dot:      vmulps zmm1, zmm5, [y]
 vaddss xmm0, xmm0, xmm1 ... repeated into xmm0
 ```
 
-The dot loop vectorizes products but extracts lanes into dependent scalar additions. Its limited speedup therefore does not contradict the compiler report. The stride kernel also checks stride==1 before its SIMD path; non-unit strides branch to vmulss/vmulsd scalar loops. Full dumps are retained as evidence; only explanatory excerpts are shown here.
+For multiply, `vmulps` multiplies several floats at once. The dot product also multiplies several values at once, but `vaddss` adds one float at a time into the running sum. Each addition depends on the previous sum. That remaining dependency helps explain why dot product did not gain much speed.
 
-## Throughput across working-set sizes
+The scalar code can still use XMM registers. Their presence alone does not mean several numbers are being processed together. No FMA was found in the inspected AXPY loop, matching the compiler setting.
+
+## 1. Throughput and array size
 
 ![Throughput plot](figures/throughput.png)
 
-*Figure 1. Median throughput for all three kernels and builds. Shading shows each configuration's observed min-max range. Vertical dotted lines mark nominal L1D, L2 and L3 capacities (48 KiB, 1 MiB, 96 MiB).*
+*Figure 1. Median throughput for the three kernels and builds. Shading shows minimum–maximum results. The vertical lines mark the reported cache sizes.*
 
-At small footprints, multiply and AXPY benefit from processing many independent elements per vector instruction. Float also offers twice as many lanes as double at the same vector width. As footprints grow, data movement becomes increasingly important and the throughput curves fall or converge. Cache boundaries are approximate: associativity, shared capacity, prefetching and other activity can shift transitions.
+Throughput measures how much work is completed per second. Here it is shown in GFLOP/s, or billions of floating-point operations per second.
 
-At the largest N, native float multiply reaches 3.479 GFLOP/s and double reaches 1.743 GFLOP/s. AXPY reaches 11.967 and 5.309 GFLOP/s, respectively. These kernels have different arithmetic intensities and write behavior, so their GFLOP/s values should not be interpreted as equal memory traffic or equal fractions of compute peak.
+Multiply and AXPY benefited from SIMD with small arrays. These calculations have many independent elements that can be processed together. As arrays became larger, throughput generally fell and the builds became closer in performance. Waiting for data became more important than the number of values handled by one instruction.
 
-The dot kernel stays near its scalar baseline. Serial reduction dependency and floating-point evaluation order limit the benefit of packed multiplication. The experiment deliberately does not enable fast-math reassociation to transform the reduction into a different numerical algorithm.
+At the largest tested length, native float multiply reached 3.479 GFLOP/s and double multiply reached 1.743 GFLOP/s. Native AXPY reached 11.967 GFLOP/s for float and 5.309 GFLOP/s for double. The kernels do different amounts of calculation per byte, so their GFLOP/s values do not directly measure equal memory use.
 
-## Speedup, locality and data type
+Dot product stayed close to scalar performance. Its running sum limited how much work could happen at once. The test did not enable fast-math settings that would allow the compiler to rearrange the additions.
+
+## 2. SIMD speedup
 
 ![Speedup plot](figures/speedup.png)
 
-*Figure 2. Ratios of median scalar time to median default/native time. The horizontal line is 1x. Cache markers use the combined footprint. Ratios are point estimates; timing variability is retained in Figure 1 and the raw trials.*
+*Figure 2. Scalar time divided by default or native time. The horizontal line at 1 means equal performance.*
 
-Native float multiply speedup decreases from 6.00x at N=1,024 to 1.23x at N=33,554,432; native float AXPY decreases from 8.69x to 1.59x. Double multiply falls from 3.70x to 0.98x and double AXPY from 4.21x to 0.99x. Increasing vector width therefore gives its clearest benefit where arithmetic and instruction overhead matter, not uniformly across memory regimes.
+| Native kernel | Speedup at N = 1,024 | Speedup at N = 33,554,432 |
+| --- | ---: | ---: |
+| Float multiply | 6.00× | 1.23× |
+| Float AXPY | 8.69× | 1.59× |
+| Double multiply | 3.70× | 0.98× |
+| Double AXPY | 4.21× | 0.99× |
 
-At equal N, double requires twice the storage and useful bytes, while a vector holds half as many elements. Both effects contribute to data-type differences. Comparisons plotted by footprint help locate cache transitions, but equal-footprint cases have different N and are not identical instruction-count workloads.
+SIMD gave large improvements for small arrays, but much smaller improvements for large arrays. Double multiply and AXPY were about the same speed as scalar at the largest size.
 
-The 128-bit default build can match or slightly exceed the native build on large arrays. At the largest size its multiply throughput is 3.510 GFLOP/s float and 1.773 GFLOP/s double. These modest differences are insufficient to claim a general advantage for narrower vectors; bandwidth pressure and run-to-run variation can outweigh vector-width benefits.
+At equal array length, doubles need twice as much memory as floats, and fewer doubles fit in one vector. Both differences affect performance. Wider vectors also did not always beat the default build. With large arrays, memory traffic and timing variation can matter more than vector width.
 
-## Alignment and tail handling
+## 3. Alignment and leftover elements
 
 ![Alignment plot](figures/alignment.png)
 
-*Figure 3. Native multiply at consecutive lengths 1,024-1,039. Points are seven-trial medians; bars show min-max. Arrays start on a 64-byte boundary or one naturally aligned element beyond it.*
+*Figure 3. Native multiply with aligned and shifted arrays. Points show medians and bars show minimum–maximum results.*
 
-All three arrays receive the same offset: 4 bytes for float or 8 bytes for double. This preserves natural type alignment. Consecutive lengths cover every remainder for 16-float vectors and twice every remainder for 8-double vectors. Larger cases N=65,536 and 65,537 test the same address offsets with a different footprint.
+Alignment describes where an array starts in memory. This test compared arrays starting on a 64-byte boundary with arrays shifted by one element: 4 bytes for float or 8 bytes for double. All three arrays received the same shift.
 
-| Native multiply | Aligned time | Shifted time | Shifted / aligned |
-| --- | --- | --- | --- |
-| float, N=1,024 | 20.89 ns | 30.40 ns | 1.455 |
-| double, N=1,024 | 44.98 ns | 56.87 ns | 1.264 |
-| float, N=65,536 | 3.155 us | 3.147 us | 0.997 |
-| double, N=65,536 | 10.842 us | 11.409 us | 1.052 |
+Lengths from 1,024 to 1,039 tested cases where the number of elements did not always divide evenly into a vector. Larger lengths of 65,536 and 65,537 were also tested.
 
-The inspected code uses unaligned-capable vmovups/vmovupd in both address cases. It has no scalar alignment peel or masked tail in these multiply loops. The main loop processes 64-byte vectors, then an optional 32-byte block, followed by up to seven scalar floats or three scalar doubles. Runtime alias checks can also select a scalar fallback.
+| Case | Aligned time | Shifted time | Shifted / aligned |
+| --- | ---: | ---: | ---: |
+| Float, N = 1,024 | 20.89 ns | 30.40 ns | 1.455 |
+| Double, N = 1,024 | 44.98 ns | 56.87 ns | 1.264 |
+| Float, N = 65,536 | 3.155 µs | 3.147 µs | 0.997 |
+| Double, N = 65,536 | 10.842 µs | 11.409 µs | 1.052 |
 
-At small N, shifted addresses are slower in these measurements; cache-line-crossing vector accesses are a plausible contributor, not an isolated proven cause. Tail cost is not monotonic: aligned float N=65,537 was faster than 65,536 (2.562 versus 3.155 us). This anomaly cautions against assigning every adjacent-size difference to remainder overhead. Guard checks detect out-of-range writes and untouched-output corruption but do not prove absence of out-of-range reads.
+The shifted arrays were slower in the small cases. Accesses crossing cache-line boundaries may contribute, but the test did not isolate that cause. The difference was smaller for the larger cases.
 
-## Stride and useful bandwidth
+The inspected code could handle unaligned addresses. It processed full 64-byte vectors, then an optional 32-byte block, then any remaining elements individually. The remaining elements are often called the tail.
+
+Adding one element did not always increase the measured time. Aligned float multiply at 65,537 elements was faster than at 65,536 in these results. This shows why small timing changes should not all be blamed on tail handling. The checks detected incorrect output and out-of-range writes, but did not prove that no out-of-range reads occurred.
+
+## 4. Stride and bandwidth
 
 ![Stride plot](figures/stride.png)
 
-*Figure 4. Largest stride-control groups, with medians and min-max bars. Top: fixed operation count while address span grows. Bottom: approximately fixed combined address span while the number of operations decreases.*
+*Figure 4. Results for strides 1, 2, 4, and 8. The top keeps the number of operations fixed; the bottom keeps the total address span approximately fixed. Bars show minimum–maximum results.*
 
-Strides 1,2,4,8 access element `i*stride`. For fixed N, the useful work stays constant while the span becomes `3*((N-1)*stride+1)*T`. The fixed-span control holds `N*stride` constant; actual spans differ by at most seven elements per array. Useful bandwidth remains 3NT/time, rather than counting skipped elements as useful work.
+Stride is the distance between elements accessed. Stride 1 uses consecutive elements, while stride 2 uses every second element. One set of tests kept the number of operations the same while the address span grew. Another kept the span about the same while reducing the number of operations.
 
-In the largest fixed-span native cases, useful bandwidth falls from 44.28 to 5.18 GiB/s for float and from 41.46 to 5.15 GiB/s for double between strides 1 and 8. The decline is consistent with using fewer elements from each fetched cache line. It is not a direct measurement of physical DRAM traffic or proof of a specific prefetch failure.
+In the largest fixed-span native cases, useful bandwidth fell from 44.28 to 5.18 GiB/s for float and from 41.46 to 5.15 GiB/s for double between strides 1 and 8. Larger strides use fewer elements from each fetched cache line, which can waste data movement.
 
-Assembly establishes a second effect: only unit stride reaches the vector loop; other tested strides use scalar multiplication. Thus the stride-1 to stride-2 change combines vectorization loss with a changed access pattern. No gather/scatter implementation is used. The scalar baseline and fixed-span control help interpret the loss, but do not fully isolate every memory-system mechanism.
+There was also a code difference: only stride 1 used the vector loop. The other tested strides used scalar multiplication. The slowdown therefore combines a change in memory access with a loss of SIMD. It cannot be explained by cache-line use alone.
 
-## Bandwidth calibration and roofline model
+## 5. Bandwidth and the roofline model
 
 ![Roofline plot](figures/roofline.png)
 
-*Figure 5. Largest-size multiply measurements from the final ISA sweep (384 MiB float, 768 MiB double). Error bars show min-max. The solid model combines measured useful bandwidth with a multiply-only compute estimate at an assumed 4.7 GHz.*
+*Figure 5. Largest-size multiply results compared with a simple performance model. The model uses measured useful bandwidth and an assumed 4.7 GHz clock for the compute estimate.*
 
-| Quantity | float | double |
-| --- | --- | --- |
+The roofline model compares two possible limits: how fast the CPU can calculate and how fast data can be supplied. Its basic form is:
+
+`performance = min(compute limit, bandwidth × operations per byte)`
+
+Multiply performs one operation for every 12 useful bytes for float, or every 24 useful bytes for double. A separate streaming-add test provided a bandwidth reference using two reads and one write. Its largest arrays exceeded the cache size.
+
+| Quantity | Float | Double |
+| --- | ---: | ---: |
 | Useful bandwidth reference | 40.93 GiB/s | 40.56 GiB/s |
-| Multiply arithmetic intensity | 1/12 FLOP/byte | 1/24 FLOP/byte |
-| Memory performance reference | 3.662 GFLOP/s | 1.815 GFLOP/s |
+| Operations per byte | 1/12 | 1/24 |
+| Performance from bandwidth reference | 3.662 GFLOP/s | 1.815 GFLOP/s |
 | Measured native multiply | 3.479 GFLOP/s | 1.743 GFLOP/s |
-| Measured / memory reference | 95.0% | 96.1% |
+| Measured / reference | 95.0% | 96.1% |
 
-The calibration uses an independent streaming-add loop with two reads and one ordinary cached write. Its reference is the median of two run medians at N=67,108,864, with seven trials per run. Largest-size totals are 768 MiB float and 1,536 MiB double. Inspected assembly confirms ZMM vaddps/vaddpd and cached stores. The reference uses the large-size plateau rather than the highest smaller-footprint rate.
+GiB/s was converted to decimal bytes per second before calculating the reference. The measured results were close to it, which supports the explanation that large-array multiply was mainly limited by data movement.
 
-`P = min(P_compute, B_useful * I_useful)`. GiB/s is converted to decimal GB/s before multiplication. At the modeled 4.7 GHz, two 512-bit multiplies/cycle give 150.4 GFLOP/s float or 75.2 double. A conventional FMA-only reference doubles those numbers to 300.8/150.4; multiply itself performs one FLOP per lane. This architectural estimate uses the listed base clock [1] and desktop Zen 5 throughput research [2], not measured operating frequency.
+The compute estimate assumes two 512-bit multiplies per cycle at 4.7 GHz. That gives 150.4 GFLOP/s for float and 75.2 GFLOP/s for double, well above the large-array results. The clock is an assumption based on the listed base frequency [1], and the instruction rate comes from the Zen 5 research in [2]. It is not a measurement of the clock during testing.
 
-The measured multiply points are near the empirical memory reference and far below the arithmetic ceiling, supporting a memory-bound interpretation. Useful bandwidth absorbs cache/write-allocation effects; it is not a physical-byte counter result or an absolute hardware bound. Cache-resident points are excluded from this streaming roofline because they can exceed its memory slope.
+The bandwidth reference counts useful bytes, not physical DRAM traffic. It is a comparison point rather than a strict hardware limit. Small arrays served by cache can exceed this memory-bandwidth reference.
 
-## Hardware cycles per element
+## 6. Hardware cycles per element
 
 ![Cycles plot](figures/cycles.png)
 
-*Figure 6. Hardware user-mode cycles per element from a separate counter run. Points are medians of seven trials; bars are min-max. K=1,024 and M=1,048,576 elements.*
+*Figure 6. User-mode CPU cycles per element. Points show medians of seven trials and bars show minimum–maximum results.*
 
-A successful perf availability check was followed by a dedicated perf_event_open harness [3]. Each trial creates a fresh disabled, pinned CPU_CYCLES event for the calling thread, excludes kernel/hypervisor execution, enables it around the kernel batch and disables it before validation. `CPE = raw counted cycles / (calls*N)`. No assumed clock is used to calculate CPE.
+Hardware counters provided another way to compare the builds. Cycles per element were calculated as:
 
-All 504 accepted measurements report `running_time/enabled_time=1.0`, so no multiplex scaling was applied. Counts include batch-loop, function-call and timer overhead; initialization, calibration, warmups, correctness checks and output are excluded. These are guest-exposed hardware-event measurements under WSL, not bare-metal isolation.
+`cycles per element = counted cycles / (kernel calls × array length)`
 
-For N=1,024, float multiply uses 1.097 cycles/element scalar versus 0.175 native; double multiply uses 1.290 versus 0.281. At the largest size, double AXPY is nearly unchanged at 2.126 scalar and 2.139 native. Counter and timing sweeps are separate datasets, so small cross-run differences should not be interpreted as contradictions or converted into precise effective clock rates.
+The counter was enabled around the kernel batch and disabled before checking results. Initialization and warmup were excluded. The counts include some timing and function-call overhead, but exclude kernel and hypervisor execution.
 
-## Conclusions, limitations and reproducibility
+All 504 measurements reported equal enabled and running times, so no scaling for time-sharing the counter was needed. These are counters exposed through WSL, not measurements from an isolated bare-metal system.
 
-### What the experiments establish
+For 1,024 elements, float multiply used 1.097 cycles per element in scalar form and 0.175 in native form. Double multiply used 1.290 and 0.281. At the largest size, double AXPY was nearly unchanged: 2.126 scalar and 2.139 native cycles per element.
 
-SIMD is most beneficial for independent, contiguous work that can exploit cache locality. Wider vectors do not guarantee proportional speedup. Large-array double multiply provides the required negative example: inspected code contains SIMD, yet the final timing sweep gives 0.98x native/scalar speedup. Its throughput is close to the independently calibrated memory reference. Dot product is a second caution: packed multiplication coexists with a serial reduction. Non-unit runtime stride is a third: the vectorized code path is bypassed entirely.
+This agrees with the main pattern: SIMD helped more for small arrays. The counter and timing tests were separate runs, so small differences between them should not be treated as exact matches or used to infer a precise CPU frequency.
 
-### Limitations and honest interpretation
+## Limitations and conclusion
 
-Early informal observations included other background application load; they are not treated as a controlled CPU-stress study or used as the final baseline. Background load was not continuously logged. The current snapshot shows Balanced power and SMT enabled, but historical BIOS/power continuity is unverified. Linux frequency controls are unavailable in this WSL guest. Core affinity reduces migration but does not isolate host scheduling or sibling activity.
+Some early informal runs had other applications open. Those runs were not used as a controlled background-load experiment or as the final baseline. Background activity and frequency were not continuously logged, and WSL still depends on host scheduling. Some cases also had large timing ranges.
 
-Several configurations have large timing ranges. All observations are retained; medians and min-max ranges are used without claiming confidence intervals. Alignment, stride and calibration datasets were collected separately. Cache-residency boundaries are nominal. No cache-miss or physical-memory-traffic counters were collected, so explanations involving those mechanisms are reasoned interpretations, not direct counter measurements.
+Cache boundaries in the plots are approximate. No cache-miss or physical-memory-traffic counters were collected for this project, so explanations about those effects are interpretations of the timing results.
 
-### Reproducing and auditing the work
+The main conclusion is that SIMD does not guarantee a large speedup. It worked well for small, contiguous multiply and AXPY arrays. With large arrays, memory traffic reduced the benefit. Double multiply at the largest size is a clear example: the native build used SIMD but had only 0.98× scalar speed. Dot product also showed that vector multiplication alone does not remove a dependent sum. Non-unit strides lost the vectorized code path entirely.
 
-The repository should retain build/run scripts, original run directories, compiler reports, assembly evidence, raw measurements, processed tables and plotting scripts. Retain the selected raw data and reproducible plotting scripts alongside this README. The final step is to commit the completed deliverables and verify that the repository access meets the instructor's submission requirements.
+## Reproducibility
+
+The supporting material includes benchmark source, build and run scripts, raw measurements, summary tables, plotting scripts, compiler reports, and assembly dumps. These files provide the details behind the figures and allow the results to be checked. The figures use the selected final datasets described above; the early two-build sweep is separate.
 
 ## Use of Artificial Intelligence (AI)
 
-Through the use of ChatGPT, I was able to teach myself about learning technical skills and details regarding SIMD profiling. It was helpful in tweaking benchmarks and drawing conclusions about my work. Some things that I didn't understand were omitted from the report, as I felt I could not grasp the AI's analysis. This left only the charts and data I did understand to be documented in the report. Overall, AI was a very helpful tool in leveraging my way out of being stuck or confused.
+I used ChatGPT to help explain SIMD concepts, work through benchmark changes, and interpret results. It was also helpful when I was stuck or confused. I left out material that I did not understand and focused on results I could follow. AI also helped with the explanations in this report to better convey my explainations.
 
 ## References
 
-[1] AMD, Ryzen 7 9850X3D specifications: https://shop-us-en.amd.com/amd-ryzen-7-9850x3d-processor/
+[1] AMD, [Ryzen 7 9850X3D specifications](https://shop-us-en.amd.com/amd-ryzen-7-9850x3d-processor/).
 
-[2] Alexander Yee, Zen5's AVX512 Teardown, original instruction-throughput experiments: https://www.numberworld.org/blogs/2024_8_7_zen5_avx512_teardown/
+[2] Alexander Yee, [Zen5's AVX512 Teardown](https://www.numberworld.org/blogs/2024_8_7_zen5_avx512_teardown/).
 
-[3] Linux man-pages, perf_event_open(2): https://man7.org/linux/man-pages/man2/perf_event_open.2.html
+[3] Linux man-pages, [perf_event_open](https://man7.org/linux/man-pages/man2/perf_event_open.2.html).

@@ -1,0 +1,1 @@
+taskset -c 0 ./bin/axpy_memory 512 steady 5 cache

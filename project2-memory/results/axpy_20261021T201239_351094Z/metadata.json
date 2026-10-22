@@ -1,0 +1,90 @@
+{
+  "case_order": [
+    [
+      2048,
+      "steady"
+    ],
+    [
+      65536,
+      "steady"
+    ],
+    [
+      512,
+      "steady"
+    ],
+    [
+      1024,
+      "steady"
+    ],
+    [
+      524288,
+      "prepared"
+    ],
+    [
+      524288,
+      "steady"
+    ],
+    [
+      262144,
+      "steady"
+    ],
+    [
+      32768,
+      "steady"
+    ],
+    [
+      8192,
+      "steady"
+    ],
+    [
+      32,
+      "steady"
+    ],
+    [
+      48,
+      "steady"
+    ],
+    [
+      131072,
+      "steady"
+    ],
+    [
+      524288,
+      "setup_inclusive"
+    ],
+    [
+      256,
+      "steady"
+    ],
+    [
+      98304,
+      "steady"
+    ],
+    [
+      16,
+      "steady"
+    ],
+    [
+      64,
+      "steady"
+    ]
+  ],
+  "smoke": false,
+  "trials": 5,
+  "counter_set": "cache",
+  "cpu": 0,
+  "swap_before": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "kernel": "Linux Andrew 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "topology": "CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE\n  0    0      0    0 0:0:0:0          yes\n  1    0      0    0 0:0:0:0          yes\n  2    0      0    1 1:1:1:0          yes\n  3    0      0    1 1:1:1:0          yes\n  4    0      0    2 2:2:2:0          yes\n  5    0      0    2 2:2:2:0          yes\n  6    0      0    3 3:3:3:0          yes\n  7    0      0    3 3:3:3:0          yes\n  8    0      0    4 4:4:4:0          yes\n  9    0      0    4 4:4:4:0          yes\n 10    0      0    5 5:5:5:0          yes\n 11    0      0    5 5:5:5:0          yes\n 12    0      0    6 6:6:6:0          yes\n 13    0      0    6 6:6:6:0          yes\n 14    0      0    7 7:7:7:0          yes\n 15    0      0    7 7:7:7:0          yes\n",
+  "src/axpy_memory.cpp_sha256": "61a74892055c33529b6fb4efc268df85b35d7b427f2c7d1a2db6d40747d60f7c",
+  "bin/axpy_memory_sha256": "b8046c1fdef078b13b55b4f6518b6442ac63f1cf6f1e98b746af04bbdce55f36",
+  "swap_after": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "guest_swap_activity": false
+}

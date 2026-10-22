@@ -160,6 +160,10 @@ Several configurations have large timing ranges. All observations are retained; 
 
 The repository should retain build/run scripts, original run directories, compiler reports, assembly evidence, raw measurements, processed tables and plotting scripts. Retain the selected raw data and reproducible plotting scripts alongside this README. The final step is to commit the completed deliverables and verify that the repository access meets the instructor's submission requirements.
 
+## Use of Artificial Intelligence (AI)
+
+Through the use of ChatGPT, I was able to teach myself about learning technical skills and details regarding SIMD profiling. It was helpful in tweaking benchmarks and drawing conclusions about my work. Some things that I didn't understand were omitted from the report, as I felt I could not grasp the AI's analysis. This left only the charts and data I did understand to be documented in the report. Overall, AI was a very helpful tool in leveraging my way out of being stuck or confused.
+
 ## References
 
 [1] AMD, Ryzen 7 9850X3D specifications: https://shop-us-en.amd.com/amd-ryzen-7-9850x3d-processor/
